@@ -19,12 +19,21 @@ curl -v "http://$fos_addr$http_port$cgi_path?$start_cmd&usr=$username&pwd=$passw
 
 lftp -u $username,$password -c "mirror -v / $media_dir" -p 50021 ftp://$fos_addr
 
-# Lftp string to locally archive
+# Lftp string to locally archive...
 # eg: lftp -u MYNAME,MYPASSWORD -c "[mirror command]" -p 50021 ftp://192.168.1.101
-# eg: "mirror -v / /root/media/cam101"
+#
+# mirror command string to feed lftp (requires quotes)...
+# eg: mirror -v / /root/media/cam101
 #                | |
 #                | \-- local target path
 #                \---- remote site source path
 
+
+##############
+##
+## for additional cameras: copy/paste/modify "set" lines above
+## and, after those, copy/paste the "curl" and "lftp" lines
+##
+##############
 
 
