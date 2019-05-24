@@ -1,0 +1,10 @@
+# first start ftp server on all cams (using manage storage button in webgui)
+# run this like: lftp -f script.lftp
+
+
+
+open -p 50021 CAMERA_ADDRESS
+user USERNAME,PASSWORD
+mirror -v / /ARCHIVE/PATH/CAM_NAME &
+
+# copy/paste/modify the above for each camera you have
