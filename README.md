@@ -23,9 +23,11 @@ Using this, we can automate the archiving process using some basic unix/linux to
 
 I prefer to install non-server-essential junk outside the main OS, in a jail, but you don't have to. Doing so with a jail will definitely require you install some things manually so it's a better instructional starting point:
 
-* pkg update
-* pkg install curl
-* pkg install lftp
+* Open a jail console (if using a jail) or SSH shell
+  * use `sudo` prefixing if you aren't root
+  * `pkg update` to update the FreeBSD repository catalogue
+  * `pkg install curl` to install curl (used to start an unstarted FTP server on the foscam)
+  * `pkg install lftp` to install lftp (which will manage all mirroring)
 * choose/prepare your script(s)
 * schedule a task
   * use crontab inside a jail, or
