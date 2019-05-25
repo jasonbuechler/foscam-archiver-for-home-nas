@@ -3,7 +3,7 @@
 
 
 
-open -p 50021 CAMERA_ADDRESS
+open -p 50021 CAMERA_IP
 user USERNAME,PASSWORD
 mirror -v / /ARCHIVE/PATH/CAM_NAME &
 
