@@ -1,10 +1,17 @@
-# first start ftp server on all cams (using manage storage button in webgui)
-# run this like: lftp -f script.lftp
+# USAGE: run this script with lftp like: lftp -f sync_script.lftp
+#
+# - Copy/paste/modify the command group, below, for each camera you have.
+# - Schedule this to run regularly using cron/etc.
 
 
-
+# - First, we use "!" to execute a shell command: send a web query to the camera
+#   which starts the builtin FTP server if it's not already started...
+# - Then, we connect and auth to the camera and execute a mirror command to copy
+#   from the camera's FTP root "/" to wherever you want your files copied.
+#
+! curl -v "http://CAMERA_IP:88/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=USERNAME&pwd=PASSWORD"
 open -p 50021 CAMERA_IP
 user USERNAME,PASSWORD
-mirror -v / /ARCHIVE/PATH/CAM_NAME &
+mirror -v / /YOUR/ARCHIVE/PATH/YOUR_CAM_LABEL &
 
-# copy/paste/modify the above for each camera you have
+
