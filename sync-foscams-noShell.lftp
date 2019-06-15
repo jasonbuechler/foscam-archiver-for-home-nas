@@ -11,7 +11,7 @@
 #
 ! curl -v "http://CAMERA_IP:88/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=USERNAME&pwd=PASSWORD"
 open -p 50021 CAMERA_IP
-user USERNAME,PASSWORD
+user USERNAME PASSWORD
 mirror -v / /YOUR/ARCHIVE/PATH/YOUR_CAM_LABEL &
 
 
