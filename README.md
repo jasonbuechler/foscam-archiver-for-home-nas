@@ -43,9 +43,9 @@ There's other ways to run Lftp on Windows, but I prefer using Chocolatey to sort
 * open an **administrator** command shell (aka run-as-administrator on cmd.exe)
 * install Chocolatey via copy/paste/execute of the install command (https://chocolatey.org/install)
   * Currently: 
-```
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-```
+  
+        @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+        
   * You should see progress text, but not errors.
   * If you see no text at all, try restarting your computer -- .net might have crashed
 * install curl and Lftp using chocolatey (in that same administrator shell)
