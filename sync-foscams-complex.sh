@@ -14,13 +14,14 @@ do
   pwd=$(echo $pwds | awk "{print \$$i}")
   dir=$(echo $dirs | awk "{print \$$i}")
 
-  echo $add $prt $usr $pwd $dir
   url="http://$add/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$usr&pwd=$pwd"
-  mir="-v / $dir"
   ip=$(echo $add | cut -d : -f 1)
 
-  echo curl -v "$url"
-  echo lftp -u $usr,$pwd -e \"mirror $mir\" -p 50021 ftp://$ip
+  echo curl -v \"$url\"
+  curl -v "$url"
+
+  echo lftp -u $usr,$pwd -e \"mirror -v / $dir\" -p 50021 ftp://$ip
+  lftp -u $usr,$pwd -e "mirror -v / $dir" -p 50021 ftp://$ip
 
   i=`expr $i + 1`
 done
