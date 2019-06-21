@@ -2,22 +2,28 @@
 #
 # This single script can be used for simple mirror operations
 #  ...as opposed to complex Lftp scripting.
+# 
+# It's purposefully minimalistic to accomodate customizations.
 # You'll need to mod this yourself for httpS or funky passwords.
 #
 
-
-# this should be same for all recent h264 foscams
+# this should be same for all recent h264
+# foscams, so no need to modify it
 cgi_cmd=/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer
 
+################################
+##  Set the next 5 lines to   ##
+##  reflect your camera and   ##
+##  its download dir path.    ##
 
-# set these to reflect your camera, & archive path
 foscam_addr=192.168.1.101
 http_port=88
 username=MYNAME
 password=MYPASSWORD
 media_dir=/path/to/media/cam101
 
-# this command pair mirrors the camera defined by the above variables
+# This command-pair mirrors the camera that is defined by the above variables.
+# You but can modify these lines if desired, but probably don't need to.
 curl -v "http://${foscam_addr}:${http_port}${cgi_cmd}&usr=${username}&pwd=${password}"
 lftp -u $username,$password -e "mirror -v / $media_dir" -p 50021 ftp://${foscam_addr}
 
