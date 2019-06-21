@@ -7,10 +7,10 @@
 # customize. You'll need to mod this yourself for httpS or funky passwords.
 #
 
-adds="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88  192.168.1.104:88"
-usrs="USERNAME1         USERNAME2         USERNAME3         USERNAME4"
-pwds="PASSWORD1         PASSWORD2         PASSWORD3         PASSWORD4"
-dirs="/media/cam1       /media/cam2       /media/cam3       /media/cam4"
+adds="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88"
+usrs="USERNAME1         USERNAME2         USERNAME3"
+pwds="PASSWORD1         PASSWORD2         PASSWORD3"
+dirs="/media/cam1       /media/cam2       /media/cam3"
 
 ##  Fill out the 4 lines above  ##
 ##  with one entry per camera.  ##
