@@ -3,8 +3,8 @@
 # This single script can be used for simple mirror operations
 #  ...as opposed to complex Lftp scripting.
 #
-# It's easier to use than the simple script but harder to read.
-# You'll need to mod this yourself for httpS or funky passwords.
+# It's easier to use than the minimal .sh script, but harder to read or to
+# customize. You'll need to mod this yourself for httpS or funky passwords.
 #
 
 adds="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88  192.168.1.104:88"
