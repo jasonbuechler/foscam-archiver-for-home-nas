@@ -1,34 +1,26 @@
-#!/bin/tcsh
+#!/bin/sh
 
-set aa = (192.168.1.101 192.168.1.102 192.168.1.103 192.168.1.104)
-set uu = (USERNAME USERNAME USERNAME USERNAME)
-set pp = (PASSWORD PASSWORD PASSWORD PASSWORD)
-set dd = ("~/cam101" "~/cam102" "~/cam103" "~/cam104")
+adds="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88  192.168.1.104:88"
+usrs="USERNAME1         USERNAME2         USERNAME3         USERNAME4"
+pwds="PASSWORD1         PASSWORD2         PASSWORD3         PASSWORD4"
+dirs="/media/cam1       /media/cam2       /media/cam2       /media/cam2"
 
-: ' It is up to YOU to make sure you have '
-: ' an equal # of elements in each set    '
-: ' (and DONT use commas)                 '
-: ' And dont judge me for these buttfugly '
-: ' variables. csh/tcsh is AWFUL.         '
+i=1
+while [ $i -le $(echo $adds | wc -w) ]
+do
+  add=$(echo $adds | awk "{print \$$i}")
+  prt=$(echo $prts | awk "{print \$$i}")
+  usr=$(echo $usrs | awk "{print \$$i}")
+  pwd=$(echo $pwds | awk "{print \$$i}")
+  dir=$(echo $dirs | awk "{print \$$i}")
 
-set port = 88
-set n = $#aa
-set i=1
-while ( $i <= $n )
-  set a = $aa[$i]
-  set u = $uu[$i]
-  set p = $pp[$i]
-  set d = $dd[$i]
+  echo $add $prt $usr $pwd $dir
+  url="http://$add/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$usr&pwd=$pwd"
+  mir="-v / $dir"
+  ip=$(echo $add | cut -d : -f 1)
 
+  echo curl -v "$url"
+  echo lftp -u $usr,$pwd -e \"mirror $mir\" -p 50021 ftp://$ip
 
-  set curl_command=`echo curl -v "http://${a}:$port/cgi-bin/CGIProxy.fcgi"`
-  set curl_params="?cmd=startFtpServer&usr=$u&pwd=$p"
-  echo "$curl_command$curl_params"
-  curl -v "http://${a}:${port}/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$u&pwd=$p"
-
-  set lftp_command=`echo lftp -u $u,$p -e \"mirror -v / $d\" -p 50021 ftp://$a`
-  echo $lftp_command
-  eval "$lftp_command &"
-
-  @  i++
-end
+  i=`expr $i + 1`
+done
