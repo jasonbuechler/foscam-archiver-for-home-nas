@@ -21,14 +21,14 @@ i=1
 # loop from 1 to the # of "words" in $adds
 while [ $i -le $(echo $adds | wc -w) ]
 do
-  # assign the i'th element of each "array" to a var
+  # assign the i'th "word" of each "array" to a var
   add=$(echo $adds | awk "{print \$$i}")
   usr=$(echo $usrs | awk "{print \$$i}")
   pwd=$(echo $pwds | awk "{print \$$i}")
   dir=$(echo $dirs | awk "{print \$$i}")
 
   # compile the ftp-wake-up url, and
-  # split $add at ':' and set ip var
+  # split $add at ':' and set $ip to 1st chunk
   url="http://$add/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$usr&pwd=$pwd"
   ip=$(echo $add | cut -d : -f 1)
 
