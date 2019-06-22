@@ -16,16 +16,16 @@ cgi_cmd=/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer
 ##  reflect your camera and   ##
 ##  its download dir path.    ##
 
-foscam_addr=192.168.1.101
-http_port=88
-username=MYNAME
-password=MYPASSWORD
-media_dir=/path/to/media/cam101
+FOSCAM_ADDR=192.168.1.101
+HTTP_PORT=88
+USERNAME=MYNAME
+PASSWORD=MYPASSWORD
+MEDIA_DIR=/path/to/media/cam101
 
 # This command-pair mirrors the camera that is defined by the above variables.
 # You but can modify these lines if desired, but probably don't need to.
-curl -v "http://${foscam_addr}:${http_port}${cgi_cmd}&usr=${username}&pwd=${password}"
-lftp -u $username,$password -e "mirror -v / $media_dir" -p 50021 ftp://${foscam_addr}
+curl -v "http://${FOSCAM_ADDR}:${HTTP_PORT}${cgi_cmd}&usr=${USERNAME}&pwd=${PASSWORD}"
+lftp -u $USERNAME,$PASSWORD -e "mirror -v / $MEDIA_DIR" -p 50021 ftp://${FOSCAM_ADDR}
 
 
 

@@ -7,10 +7,10 @@
 # customize. You'll need to mod this yourself for httpS or funky passwords.
 #
 
-adds="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88"
-usrs="USERNAME1         USERNAME2         USERNAME3"
-pwds="PASSWORD1         PASSWORD2         PASSWORD3"
-dirs="/media/cam1       /media/cam2       /media/cam3"
+ADDS="192.168.1.101:88  192.168.1.102:88  192.168.1.103:88"
+USRS="USERNAME1         USERNAME2         USERNAME3"
+PWDS="PASSWORD1         PASSWORD2         PASSWORD3"
+DIRS="/media/cam1       /media/cam2       /media/cam3"
 
 ##  Fill out the 4 lines above  ##
 ##  with one entry per camera.  ##
@@ -18,25 +18,25 @@ dirs="/media/cam1       /media/cam2       /media/cam3"
 
 
 i=1
-# loop from 1 to the # of "words" in $adds
-while [ $i -le $(echo $adds | wc -w) ]
+# loop from 1 to the # of "words" in $ADDS
+while [ $i -le $(echo $ADDS | wc -w) ]
 do
   # assign the i'th "word" of each "array" to a var
-  add=$(echo $adds | awk "{print \$$i}")
-  usr=$(echo $usrs | awk "{print \$$i}")
-  pwd=$(echo $pwds | awk "{print \$$i}")
-  dir=$(echo $dirs | awk "{print \$$i}")
+  ADD=$(echo $ADDS | awk "{print \$$i}")
+  USR=$(echo $USRS | awk "{print \$$i}")
+  PWD=$(echo $PWDS | awk "{print \$$i}")
+  DIR=$(echo $DIRS | awk "{print \$$i}")
 
   # compile the ftp-wake-up url, and
-  # split $add at ':' and set $ip to 1st chunk
-  url="http://$add/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$usr&pwd=$pwd"
-  ip=$(echo $add | cut -d : -f 1)
+  # split $ADD at ':' and set $ip to 1st chunk
+  url="http://$ADD/cgi-bin/CGIProxy.fcgi?cmd=startFtpServer&usr=$USR&pwd=$PWD"
+  ip=$(echo $ADD | cut -d : -f 1)
 
   echo curl -v \"$url\"
   curl -v "$url"
 
-  echo lftp -u $usr,$pwd -e \"mirror -v / $dir\" -p 50021 ftp://$ip
-  lftp -u $usr,$pwd -e "mirror -v / $dir" -p 50021 ftp://$ip
+  echo lftp -u $USR,$PWD -e \"mirror -v / $DIR\" -p 50021 ftp://$ip
+  lftp -u $USR,$PWD -e "mirror -v / $DIR" -p 50021 ftp://$ip
 
   i=`expr $i + 1`
 done
