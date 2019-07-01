@@ -1,10 +1,10 @@
 #!/bin/sh
 
 
-# get YYMMDD digits from exactly 1d ago, then find all
+# get YYYYMMDD digits from exactly 1d ago, then find all
 # directories relative to PWD that start with YYYYMMDD_
-YEST=`date -v -1d '+%Y%m%d'`
-DIRS=`find . -type d -name "${YEST}_*"`
+YEST=$(date -v -1d '+%Y%m%d')
+DIRS=$(find . -type d -name "${YEST}_*")
 
 echo "** yesterday: $YEST"
 echo "**   execute: find . -type d -name \"${YEST}_*\""
@@ -62,22 +62,20 @@ done
 # 
 # find . -type d -name '20190628_*'
 # ./cam102/C1_C4D655400B18/record/20190628/20190628_005407
-# ./cam101/C1_C4D65540B50B/record/20190628/20190628_001027
-# ./cam106/C1_00626E6B09A9/record/20190628/20190628_000857
 # ./cam104/C1_C4D65540BEDF/record/20190628/20190628_003031
 # ./cam103/IPCamera/C1_C4D6553F139E/record/20190628/20190628_000410
 # ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_200537
-# ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_121859
-# ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_003518
+# ./cam107/IPCamera/C2_00626E6133BC    <== $TARGET
+#                                                   /‾‾‾$FNAME‾‾‾‾\
+# ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_003518/SDalarm_20190628_003211.avi
 # ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_003518/MDalarm_20190628_003518.avi
-# \_______f1_________/ \___________f2______________________/ \____f3______/ \__f4__/ \__f5____/
+# \_______k1_________/ \___________k2______________________/ \____k3______/ \__k4__/ \__k5____/
 # 
-# ./cam107/IPCamera/C2_00626E6133BC <== $TARGET
-# ./cam107/IPCamera/C2_00626E6133BC/record/20190628/20190628_003518/MDalarm_20190628_003518.avi
+#                           ^^ field keys using _ delimiter ^^
+#          could easily fall apart if user's folder structure uses underscores :(
 #
 # ./cam107/IPCamera/C2_00626E6133BC/
-#                                   20190628_003518.txt
-#                                   record/20190628/20190628_003518/MDalarm_20190628_003518.avi
+#   sorted avi list to concat ==>   20190628_003518.txt
+#   filepath relative to .txt ==>   record/20190628/20190628_003518/SDalarm_20190628_003518.avi
 #                                   record/20190628/20190628_003518/MDalarm_20190628_003940.avi
 #
-#        
