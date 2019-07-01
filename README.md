@@ -80,3 +80,25 @@ There's other ways to run Lftp on Windows, but I prefer using Chocolatey to sort
   * point the "Program/script" box at the Lftp binary: e.g. `lftp.exe` or `C:\PATH\TO\lftp.exe`
   * set the "Add arguments" box to `-f /cygdrive/C/PATH/TO/sync_foscams_noshell.lftp`
   * NOTE: in the arguments box, the standard windows "c:\whatever" syntax is replaced by "/cygdrive/c/whatever" with slashes reversed to make the Cygwin environment happy
+
+
+# Create daily digest of combined recordings using Summarizer
+
+## What it does
+
+The summarizer script 
+* gathers the files under every "YYYYMMDD/YYYYMMDD_hhmmss" directory (created for first video of the day or first recording after a reboot) 
+* sorts them by record-time alone, so SDalarm, MDalarm, and Scheduled files aren't grouped
+* and **losslessly** combines them using ffmpeg. (i.e. you'd have to also install ffmpeg using "pkg install ffmpeg"/etc)
+
+It's written in Bourne shell so isn't windows-box ready.
+
+## Modifying for your purposes
+
+In its current form, the ffmpeg string strips the audio out and losslessly combines to a file with size equal to the video streams of all included clips. This could easily be changed to suit individual purposes. E.g.:
+* re-encode at smaller dimensions
+* re-encode using "time lapse"
+* re-encode any/all of the above *in addition to* a lossless digest
+* etc, etc
+
+Ffmpeg has a **daunting** number of options, so I eventually plan to include some "uncomment to x/y/z" flags for common operations.
