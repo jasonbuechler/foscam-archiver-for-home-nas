@@ -40,6 +40,8 @@ do
   # (since ffmpeg's concat routine expects that relativity)
   ls -1 $DIR/*.avi | sort -t_ -k4,5 | \
   sed "s/.*\/record\//record\//" | sed "s/.*/file '&'/" > $TARGET/$FNAME.txt
+  # unsure if ffmpeg will work with leading-/ absolute paths but
+  # if it does, sed "s|^\.|$(pwd)|" might be a better approach
 
 
   echo "** filenames list: $TARGET/$FNAME.txt"
