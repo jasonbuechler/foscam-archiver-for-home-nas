@@ -22,10 +22,11 @@ i=1
 while [ $i -le $(echo $ADDS | wc -w) ]
 do
   # assign the i'th "word" of each "array" to a var
-  ADD=$(echo $ADDS | awk "{print \$$i}")
-  USR=$(echo $USRS | awk "{print \$$i}")
-  PWD=$(echo $PWDS | awk "{print \$$i}")
-  DIR=$(echo $DIRS | awk "{print \$$i}")
+  # (elements are cut at whitespace so... beware)
+  ADD=$(echo $ADDS | cut -w -f $i)
+  USR=$(echo $USRS | cut -w -f $i)
+  PWD=$(echo $PWDS | cut -w -f $i)
+  DIR=$(echo $DIRS | cut -w -f $i)
 
   # compile the ftp-wake-up url, and
   # split $ADD at ':' and set $ip to 1st chunk
