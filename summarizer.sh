@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Summarizer 
+#
+# Create daily digest for each camera by
+# concat'ing clips together w/ ffmpeg
+#
+# (Run from near root of mirror archive)
+#########################################
+
 
 # get YYYYMMDD digits from exactly 1d ago, then find all
 # directories relative to PWD that start with YYYYMMDD_
